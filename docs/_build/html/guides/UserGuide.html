@@ -1,0 +1,979 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>User Guide &mdash; pbench  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Pbench" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> pbench
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Pbench-agent</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">User Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#what-is-pbench">What is Pbench?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tl-dr-how-to-set-up-pbench-and-run-a-benchmark">TL;DR - How to set up Pbench and run a benchmark</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-to-install">How to install</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#defaults">Defaults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#available-tools">Available tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#available-benchmark-scripts">Available benchmark scripts</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pbench-dbench">pbench-dbench</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pbench-fio">pbench-fio</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pbench-linpack">pbench-linpack</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pbench-migrate">pbench-migrate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pbench-tpcc">pbench-tpcc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pbench-uperf">pbench-uperf</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pbench-user-benchmark">pbench-user-benchmark</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#utility-scripts">Utility Scripts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#second-steps">Second Steps</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#benchmark-scripts-options">Benchmark scripts options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#collection-tools-options">Collection tools options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#utility-script-options">Utility script options</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#running-pbench-collection-tools-with-an-arbitrary-benchmark">Running Pbench collection tools with an arbitrary benchmark</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#remote-hosts">Remote hosts</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#multihost-benchmarks">Multihost benchmarks</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#customizing">Customizing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#results-handling">Results handling</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#accessing-results-on-the-web">Accessing results on the web</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#where-to-go-to-see-results">Where to go to see results</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#advanced-topics">Advanced topics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#triggers">Triggers</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">pbench</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>User Guide</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/guides/UserGuide.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="user-guide">
+<span id="userguide"></span><h1><a class="toc-backref" href="#id4">User Guide</a><a class="headerlink" href="#user-guide" title="Permalink to this headline">¶</a></h1>
+<div class="contents topic" id="contents">
+<p class="topic-title">Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#user-guide" id="id4">User Guide</a><ul>
+<li><a class="reference internal" href="#what-is-pbench" id="id5">What is Pbench?</a></li>
+<li><a class="reference internal" href="#tl-dr-how-to-set-up-pbench-and-run-a-benchmark" id="id6">TL;DR - How to set up Pbench and run a benchmark</a></li>
+<li><a class="reference internal" href="#how-to-install" id="id7">How to install</a></li>
+<li><a class="reference internal" href="#defaults" id="id8">Defaults</a></li>
+<li><a class="reference internal" href="#available-tools" id="id9">Available tools</a></li>
+<li><a class="reference internal" href="#available-benchmark-scripts" id="id10">Available benchmark scripts</a><ul>
+<li><a class="reference internal" href="#pbench-dbench" id="id11">pbench-dbench</a></li>
+<li><a class="reference internal" href="#pbench-fio" id="id12">pbench-fio</a></li>
+<li><a class="reference internal" href="#pbench-linpack" id="id13">pbench-linpack</a></li>
+<li><a class="reference internal" href="#pbench-migrate" id="id14">pbench-migrate</a></li>
+<li><a class="reference internal" href="#pbench-tpcc" id="id15">pbench-tpcc</a></li>
+<li><a class="reference internal" href="#pbench-uperf" id="id16">pbench-uperf</a></li>
+<li><a class="reference internal" href="#pbench-user-benchmark" id="id17">pbench-user-benchmark</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#utility-scripts" id="id18">Utility Scripts</a></li>
+<li><a class="reference internal" href="#second-steps" id="id19">Second Steps</a><ul>
+<li><a class="reference internal" href="#benchmark-scripts-options" id="id20">Benchmark scripts options</a></li>
+<li><a class="reference internal" href="#collection-tools-options" id="id21">Collection tools options</a></li>
+<li><a class="reference internal" href="#utility-script-options" id="id22">Utility script options</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#running-pbench-collection-tools-with-an-arbitrary-benchmark" id="id23">Running Pbench collection tools with an arbitrary benchmark</a></li>
+<li><a class="reference internal" href="#remote-hosts" id="id24">Remote hosts</a><ul>
+<li><a class="reference internal" href="#multihost-benchmarks" id="id25">Multihost benchmarks</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#customizing" id="id26">Customizing</a></li>
+<li><a class="reference internal" href="#results-handling" id="id27">Results handling</a><ul>
+<li><a class="reference internal" href="#accessing-results-on-the-web" id="id28">Accessing results on the web</a></li>
+<li><a class="reference internal" href="#where-to-go-to-see-results" id="id29">Where to go to see results</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#advanced-topics" id="id30">Advanced topics</a><ul>
+<li><a class="reference internal" href="#triggers" id="id31">Triggers</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="what-is-pbench">
+<h2><a class="toc-backref" href="#id5">What is Pbench?</a><a class="headerlink" href="#what-is-pbench" title="Permalink to this headline">¶</a></h2>
+<p>Pbench is a harness that allows data collection from a variety of tools while running a benchmark. Pbench has some built-in scripts
+that run some common benchmarks, but the data collection can be run separately as well with a benchmark that is not built-in to
+Pbench, or a Pbench script can be written for the benchmark. Such contributions are more than welcome!</p>
+</div>
+<div class="section" id="tl-dr-how-to-set-up-pbench-and-run-a-benchmark">
+<h2><a class="toc-backref" href="#id6">TL;DR - How to set up Pbench and run a benchmark</a><a class="headerlink" href="#tl-dr-how-to-set-up-pbench-and-run-a-benchmark" title="Permalink to this headline">¶</a></h2>
+<p>Prerequisite: Somebody has already done the server setup.</p>
+<p>The following steps assume that only a single node participates in the benchmark run. If you want a multi-node setup, you have to
+read up on the –remote options of various commands (in particular, pbench-register-tool-set):</p>
+<ul>
+<li><p class="first"><a class="reference external" href="https://distributed-system-analysis.github.io/pbench/start.html">Install the agent</a></p>
+</li>
+<li><p class="first">Customize the agent for your server environment. This will vary from installation to installation, but it fundamentally involves
+copying two files that should be made available to you somehow by an admin type: an ssh private key file to allow the client(s) to
+send results to the server and a configuration file that should be installed in <code class="docutils literal notranslate"><span class="pre">/opt/pbench-agent/config/pbench-agent.cfg</span></code> .
+There is an example configuration file in that location, but you need the “real” one for your environment. Among other things,
+the config file specifies the IP or hostname of the server.</p>
+</li>
+<li><p class="first">Run your benchmark with a default set of tools:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>. /etc/profile.d/pbench-agent.sh         <span class="c1"># or log out and log back in</span>
+pbench-register-tool-set
+pbench-user-benchmark -C test1 -- ./your_cmd.sh
+pbench-move-results
+</pre></div>
+</div>
+</li>
+<li><p class="first">Visit the Results URL in your browser to see the results: the URL depends on the server hostname or IP”; assuming that the server
+is “pbench.example.com” and assuming you ran the above on a host named “myhost”, the results will be found at (<strong>N.B.:</strong> this is
+a fake link serving as an example only - talk to your local administrator to find out what server to use to get to Pbench results):
+<a class="reference external" href="http://pbench.example.com/results/myhost/pbench-user-benchmark_test1_yyyy-mm-dd_HH:MM:SS">http://pbench.example.com/results/myhost/pbench-user-benchmark_test1_yyyy-mm-dd_HH:MM:SS</a>.</p>
+</li>
+</ul>
+<p>For explanations and details, see subsequent sections.</p>
+</div>
+<div class="section" id="how-to-install">
+<h2><a class="toc-backref" href="#id7">How to install</a><a class="headerlink" href="#how-to-install" title="Permalink to this headline">¶</a></h2>
+<p>See the <a class="reference external" href="https://distributed-system-analysis.github.io/pbench/start.html">install section</a> for details.</p>
+</div>
+<div class="section" id="defaults">
+<h2><a class="toc-backref" href="#id8">Defaults</a><a class="headerlink" href="#defaults" title="Permalink to this headline">¶</a></h2>
+<p>The benchmark scripts source the base script (/opt/pbench-agent/base) which sets a bunch of defaults:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">pbench_run</span><span class="o">=</span>/var/lib/pbench-agent
+<span class="nv">pbench_log</span><span class="o">=</span>/var/lib/pbench-agent/pbench.log
+<span class="nv">date</span><span class="o">=</span><span class="sb">`</span>date <span class="s2">&quot;+%F_%H:%M:%S&quot;</span><span class="sb">`</span>
+<span class="nv">hostname</span><span class="o">=</span><span class="sb">`</span>hostname -s<span class="sb">`</span>
+<span class="nv">results_repo</span><span class="o">=</span>pbench@pbench.example.com
+<span class="nv">results_repo_dir</span><span class="o">=</span>/pbench/public_html/incoming
+<span class="nv">ssh_opts</span><span class="o">=</span><span class="s1">&#39;-o StrictHostKeyChecking=no&#39;</span>
+</pre></div>
+</div>
+<p>These are now specified in the config file <code class="docutils literal notranslate"><span class="pre">/opt/pbench-agent/config/pbench-agent.cfg</span></code>.</p>
+</div>
+<div class="section" id="available-tools">
+<h2><a class="toc-backref" href="#id9">Available tools</a><a class="headerlink" href="#available-tools" title="Permalink to this headline">¶</a></h2>
+<p>The configured default set of tools (what you would get by running pbench-register-tool-set) is:</p>
+<ul class="simple">
+<li>sar, iostat, mpstat, pidstat, proc-vmstat, proc-interrupts, perf</li>
+</ul>
+<p>In addition, there are tools that can be added to the default set with pbench-register-tool:</p>
+<ul class="simple">
+<li>blktrace, cpuacct, dm-cache, docker, kvmstat, kvmtrace, lockstat, numastat, perf, porc-sched_debug, proc-vmstat, qemu-migrate,
+rabbit, strace, sysfs, systemtap, tcpdump, turbostat, virsh-migrate, vmstat</li>
+</ul>
+<p>There is a default group of tools (that’s what pbench-register-tool-set uses), but tools can be registered in other groups using
+the –group option of pbench-register-tool. The group can then be started and stopped using pbench-start-tools and pbench-stop-tools
+using their –group option.</p>
+<p>Additional tools can be registered:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pbench-register-tool --name blktrace
+</pre></div>
+</div>
+<p>or unregistered (e.g. some people prefer to run without perf):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pbench-unregister-tool --name perf
+</pre></div>
+</div>
+<p>Note that perf is run in a “low overhead” mode with options “record -a –freq=100”, but if you want to run it differently, you can
+always unregister it and register it again with different options:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pbench-unregister-tool --name<span class="o">=</span>perf
+pbench-register-tool --name<span class="o">=</span>perf -- --record-opts<span class="o">=</span><span class="s2">&quot;record -a --freq=200&quot;</span>
+</pre></div>
+</div>
+<p>Tools can be also be registered, started and stopped on remote hosts (see the –remote option described in What does –remote do?
+in <a class="reference external" href="https://distributed-system-analysis.github.io/pbench/learn.html#faq">FAQ section</a>.</p>
+</div>
+<div class="section" id="available-benchmark-scripts">
+<h2><a class="toc-backref" href="#id10">Available benchmark scripts</a><a class="headerlink" href="#available-benchmark-scripts" title="Permalink to this headline">¶</a></h2>
+<p>Pbench provides a set of pre-packaged scripts to run some common benchmarks using the collection tools and other facilities that
+pbench provides. These are found in the bench-scripts directory of the Pbench installation (<code class="docutils literal notranslate"><span class="pre">/opt/pbench-agent/bench-scripts</span></code> by
+default). The current set includes:</p>
+<ul class="simple">
+<li>pbench-dbench</li>
+<li>pbench fio</li>
+<li>pbench-linpack</li>
+<li>pbench-migrate</li>
+<li>pbench-tpcc</li>
+<li>pbench-uperf</li>
+<li>pbench-user-benchmark (see <a class="reference internal" href="#running-pbench-collection-tools-with-an-arbitrary-benchmark"><span class="std std-ref">Running Pbench collection tools with an arbitrary benchmark</span></a> below for more on this)</li>
+</ul>
+<p>You can run any of these with the –help option to get basic information about how to run the script. Most of these scripts accept
+a standard set of generic options, some semi-generic ones that are common to a bunch of benchmarks, as well as some benchmark
+specific options that vary from benchmark to benchmark.</p>
+<p>The generic options are:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="87%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>–help</td>
+<td>show the set of options that the benchmark accepts.</td>
+</tr>
+<tr class="row-even"><td>–config</td>
+<td>the name of the testing configuration (user specified).</td>
+</tr>
+<tr class="row-odd"><td>–tool-group</td>
+<td>the name of the tool group specifying the tools to run during execution of the benchmark.</td>
+</tr>
+<tr class="row-even"><td>–install</td>
+<td>just install the benchmark (and any other needed packages) - do not run the benchmark.</td>
+</tr>
+</tbody>
+</table>
+<p>The semi-generic ones are:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="17%" />
+<col width="83%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>–test-types</td>
+<td>the test types for the given benchmark - the values are benchmark-specific and can be obtained using –help.</td>
+</tr>
+<tr class="row-even"><td>–runtime</td>
+<td>maximum runtime in seconds.</td>
+</tr>
+<tr class="row-odd"><td>–clients</td>
+<td>list of hostnames (or IPs) of systems that run the client (drive the test).</td>
+</tr>
+<tr class="row-even"><td>–samples</td>
+<td>the number of samples per iteration.</td>
+</tr>
+<tr class="row-odd"><td>–max-stddev</td>
+<td>the percent maximum standard deviation allowed in order to consider the iteration to pass.</td>
+</tr>
+<tr class="row-even"><td>–max-failures</td>
+<td>the maximum number of failures to achieve the allowed standard deviation.</td>
+</tr>
+<tr class="row-odd"><td>–postprocess-only</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>–run-dir</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>–start-iteration-num</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>–tool-label-pattern</td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
+<p>Benchmark-specific options are called out in the following sections for each benchmark.</p>
+<p>Note that in some of these scripts the default tool group is hard-wired: if you want them to run a different tool group, you need
+to edit the script.</p>
+<div class="section" id="pbench-dbench">
+<h3><a class="toc-backref" href="#id11">pbench-dbench</a><a class="headerlink" href="#pbench-dbench" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="100%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>–threads</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="pbench-fio">
+<h3><a class="toc-backref" href="#id12">pbench-fio</a><a class="headerlink" href="#pbench-fio" title="Permalink to this headline">¶</a></h3>
+<p>Iterations are the cartesian product targets X test-types X block-sizes. More information on many of the following can be obtained
+from the fio man page.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="84%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>–direct</td>
+<td>O_DIRECT enabled or not (1/0) - default is 1.</td>
+</tr>
+<tr class="row-even"><td>–sync</td>
+<td>O_SYNC enabled or not (1/0) - default is 0.</td>
+</tr>
+<tr class="row-odd"><td>–rate-iops</td>
+<td>IOP rate not to be exceeded (per job, per client)</td>
+</tr>
+<tr class="row-even"><td>–ramptime</td>
+<td>seconds - time to warm up test before measurement.</td>
+</tr>
+<tr class="row-odd"><td>–block-sizes</td>
+<td>list of block sizes - default is 4, 64, 1024.</td>
+</tr>
+<tr class="row-even"><td>–file-size</td>
+<td>fio will create files of this size during the job run.</td>
+</tr>
+<tr class="row-odd"><td>–targets</td>
+<td>file locations (list of directory/block device).</td>
+</tr>
+<tr class="row-even"><td>–job-mode</td>
+<td>serial/concurrent - default is concurrent.</td>
+</tr>
+<tr class="row-odd"><td>–ioengine</td>
+<td>any IO engine that fio supports (see the fio man page) - default is psync.</td>
+</tr>
+<tr class="row-even"><td>–iodepth</td>
+<td>number of I/O units to keep in flight against the file.</td>
+</tr>
+<tr class="row-odd"><td>–client-file</td>
+<td>file containing list of clients, one per line.</td>
+</tr>
+<tr class="row-even"><td>–numjobs</td>
+<td>number of clones (processes/threads performing the same workload) of this job
+- default is 1.</td>
+</tr>
+<tr class="row-odd"><td>–job-file</td>
+<td>if you need to go beyond the recognized options, you can use a fio job file.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="pbench-linpack">
+<h3><a class="toc-backref" href="#id13">pbench-linpack</a><a class="headerlink" href="#pbench-linpack" title="Permalink to this headline">¶</a></h3>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">TBD</p>
+</div>
+</div>
+<div class="section" id="pbench-migrate">
+<h3><a class="toc-backref" href="#id14">pbench-migrate</a><a class="headerlink" href="#pbench-migrate" title="Permalink to this headline">¶</a></h3>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">TBD</p>
+</div>
+</div>
+<div class="section" id="pbench-tpcc">
+<h3><a class="toc-backref" href="#id15">pbench-tpcc</a><a class="headerlink" href="#pbench-tpcc" title="Permalink to this headline">¶</a></h3>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">TBD</p>
+</div>
+</div>
+<div class="section" id="pbench-uperf">
+<h3><a class="toc-backref" href="#id16">pbench-uperf</a><a class="headerlink" href="#pbench-uperf" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="100%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>–kvm-host</td>
+</tr>
+<tr class="row-even"><td>–message-sizes</td>
+</tr>
+<tr class="row-odd"><td>–protocols</td>
+</tr>
+<tr class="row-even"><td>–instances</td>
+</tr>
+<tr class="row-odd"><td>–servers</td>
+</tr>
+<tr class="row-even"><td>–server-nodes</td>
+</tr>
+<tr class="row-odd"><td>–client-nodes</td>
+</tr>
+<tr class="row-even"><td>–log-response-times</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="pbench-user-benchmark">
+<h3><a class="toc-backref" href="#id17">pbench-user-benchmark</a><a class="headerlink" href="#pbench-user-benchmark" title="Permalink to this headline">¶</a></h3>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">TBD</p>
+</div>
+</div>
+</div>
+<div class="section" id="utility-scripts">
+<h2><a class="toc-backref" href="#id18">Utility Scripts</a><a class="headerlink" href="#utility-scripts" title="Permalink to this headline">¶</a></h2>
+<p>This section is needed as preparation for the <a class="reference internal" href="#second-steps"><span class="std std-ref">Second Steps</span></a> section below.</p>
+<p>Pbench uses a bunch of utility scripts to do common operations. There is a common set of options for some of these: –name to specify
+a tool, –group to specify a tool group, –with-options to list or pass options to a tool, –remote to operate on a remote host
+(see entries in the <a class="reference external" href="https://distributed-system-analysis.github.io/pbench/learn.html#faq">FAQ section</a> for more details on these options).</p>
+<p>The first set is for registering and unregistering tools and getting some information about them:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="28%" />
+<col width="72%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Command</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>pbench-list-tools</td>
+<td><div class="first last line-block">
+<div class="line">list the tools in the default group or in the specified group; with the</div>
+<div class="line">–name option, list the groups that the named tool is in.</div>
+<div class="line">TBD: how do you list all available tools whether in a group or not?</div>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td>pbench-register-tool-set</td>
+<td><div class="first last line-block">
+<div class="line">call pbench-register-tool on each tool in the default list.</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td>pbench-register-tool</td>
+<td><div class="first last line-block">
+<div class="line">add a tool to a tool group (possibly remotely).</div>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td>pbench-unregister-tool (Obsolete)</td>
+<td><div class="first last line-block">
+<div class="line">remove a tool from a tool group (possibly remotely).</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td>pbench-clear-tools</td>
+<td><div class="first last line-block">
+<div class="line">remove a tool or all tools from a specified tool group (including</div>
+<div class="line">remotely). Used with a –name option, it replaces pbench</div>
+<div class="line">-unregistered-tool.</div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<p>The second set is for controlling the running of tools – pbench-start-tools and pbench-stop-tools, as well as pbench-postprocess-
+tools below, take –group, –dir and –iteration options: which group of tools to start/stop/postprocess, which directory to use
+to stash results and a label to apply to this set of results. pbench-kill-tools is used to make sure that all running tools are
+stopped: having a bunch of tools from earlier runs still running has been known to happen and is the cause of many problems
+(slowdowns in particular):</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="19%" />
+<col width="81%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Command</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>pbench-start-tools</td>
+<td><div class="first last line-block">
+<div class="line">start a group of tools, stashing the results in the directory specified by –dir.</div>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td>pbench-stop-tools</td>
+<td><div class="first last line-block">
+<div class="line">stop a group of tools</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td>pbench-kill-tools</td>
+<td><div class="first last line-block">
+<div class="line">make sure that no tools are running to pollute the environment.</div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<p>The third set is for handling the results and doing cleanup:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="28%" />
+<col width="72%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Command</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>pbench-postprocess-tools</td>
+<td><div class="first last line-block">
+<div class="line">run all the relevant postprocessing scripts on the tool output - this</div>
+<div class="line">step also gathers up tool output from remote hosts to the local host</div>
+<div class="line">in preparation for copying it to the results repository.</div>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td>pbench-clear-results</td>
+<td><div class="first last line-block">
+<div class="line">start with a clean slate.</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td>pbench-copy-results</td>
+<td><div class="first last line-block">
+<div class="line">copy results to the results repo.</div>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td>pbench-move-results</td>
+<td><div class="first last line-block">
+<div class="line">move the results to the results repo and delete them from the local host.</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td>pbench-edit-prefix</td>
+<td><div class="first last line-block">
+<div class="line">change the directory structure of the results (see the</div>
+<div class="line"><a class="reference internal" href="#accessing-results-on-the-web"><span class="std std-ref">Accessing results on the web</span></a> section below for details).</div>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td>pbench-cleanup</td>
+<td><div class="first last line-block">
+<div class="line">clean up the pbench run directory - after this step, you will need to</div>
+<div class="line">register any tools again.</div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<p>pbench-register-tool-set, pbench-register-tool and pbench-unregister-tool can also take a –remote option (see What does –remote
+do?) in <a class="reference external" href="https://distributed-system-analysis.github.io/pbench/learn.html#faq">FAQ section</a> in order to allow the starting/stopping of tools and the postprocessing of results on multiple remote hosts.</p>
+<p>There is a set of miscellaneous tools for doing various and sundry things - although the name of the script indicates its purpose,
+if you want more information on these, you will have to read the code:</p>
+<ul class="simple">
+<li>pbench-avg-stddev</li>
+<li>pbench-log-timestamp</li>
+</ul>
+<p>These are used by various pieces of Pbench. There is also a contrib directory that contains completely unsupported tools that
+various people have found useful.</p>
+</div>
+<div class="section" id="second-steps">
+<h2><a class="toc-backref" href="#id19">Second Steps</a><a class="headerlink" href="#second-steps" title="Permalink to this headline">¶</a></h2>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">It is highly recommended that you use one of the pbench-&lt; benchmark&gt; scripts for running your benchmark. If one does not
+exist already, you might be able to use the pbench-user-benchmark script to run your own script. The advantage is that these
+scripts already embody some conventions that Pbench and associated tools depend on, e.g. using a timestamp in the name of the
+results directory to make the name unique. If you cannot use pbench-user-benchmark and a pbench-&lt; benchmark&gt; script does not
+exist already, consider writing one or helping us write one. The more we can encapsulate all these details into generally
+useful tools, the easier it will be for everybody: people running it will not need to worry about all these details and people
+maintaining the system will not have to fix stuff because the script broke some assumptions. The easiest way to do so is to crib
+an existing pbench- script, e.g pbench-fio.</p>
+</div>
+<p>Once collection tools have been registered, the work flow of a benchmark script is as follows:</p>
+<ul>
+<li><p class="first">Process options (see <a class="reference internal" href="#benchmark-scripts-options"><span class="std std-ref">Benchmark scripts options</span></a>).</p>
+</li>
+<li><p class="first">Check that the necessary prerequisites are installed and if not, install them.</p>
+</li>
+<li><p class="first">Iterate over some set of benchmark characteristics (e.g. pbench-fio iterates over a couple test types: read, randread and a bunch
+of block sizes), with each iteration doing the following:</p>
+<blockquote>
+<div><ul class="simple">
+<li>create a benchmark_results directory</li>
+<li>start the collection tools</li>
+<li>run the benchmark</li>
+<li>stop the collection tools</li>
+<li>postprocess the collection tools data</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+<p>The tools are started with an invocation of pbench-start-tools like this:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pbench-start-tools --group<span class="o">=</span><span class="nv">$group</span> --iteration<span class="o">=</span><span class="nv">$iteration</span> --dir<span class="o">=</span><span class="nv">$benchmark_tools_dir</span>
+</pre></div>
+</div>
+<p>where the group is usually “default” but can be changed to taste as described above, iteration is a benchmark-specific tag that
+disambiguates the separate iterations in a run (e.g. for pbench-fio it is a combination of a count, the test type, the block size
+and a device name), and the benchmark_tools_dir specifies where the collection results are going to end up (see the section for
+much more detail on this).</p>
+<p>The stop invocation is parallel, as is the postprocessing invocation:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pbench-stop-tools --group<span class="o">=</span><span class="nv">$group</span> --iteration<span class="o">=</span><span class="nv">$iteration</span> --dir<span class="o">=</span><span class="nv">$benchmark_tools_dir</span>
+pbench-postprocess-tools --group<span class="o">=</span><span class="nv">$group</span> --iteration<span class="o">=</span><span class="nv">$iteration</span> --dir<span class="o">=</span><span class="nv">$benchmark_tools_dir</span>
+</pre></div>
+</div>
+<div class="section" id="benchmark-scripts-options">
+<h3><a class="toc-backref" href="#id20">Benchmark scripts options</a><a class="headerlink" href="#benchmark-scripts-options" title="Permalink to this headline">¶</a></h3>
+<p>Generally speaking, benchmark scripts do not take any pbench-specific options except –config (see What does –config do? in <a class="reference external" href="https://distributed-system-analysis.github.io/pbench/learn.html#faq">FAQ
+section</a>). Other options tend to be benchmark-specific.</p>
+</div>
+<div class="section" id="collection-tools-options">
+<h3><a class="toc-backref" href="#id21">Collection tools options</a><a class="headerlink" href="#collection-tools-options" title="Permalink to this headline">¶</a></h3>
+<p>–help can be used to trigger the usage message on all of the tools (even though it’s an invalid option for many of them). Here
+is a list of gotcha’s:</p>
+<ul class="simple">
+<li>blktrace: you need to pass –devices=/dev/sda,/dev/sdb when you register the tool:</li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pbench-register-tool --name<span class="o">=</span>blktrace <span class="o">[</span>--remote<span class="o">=</span>foo<span class="o">]</span> -- --devices<span class="o">=</span>/dev/sda,/dev/sdb
+</pre></div>
+</div>
+<p>There is no default and leaving it empty causes errors in postprocessing (this should be flagged).</p>
+</div>
+<div class="section" id="utility-script-options">
+<h3><a class="toc-backref" href="#id22">Utility script options</a><a class="headerlink" href="#utility-script-options" title="Permalink to this headline">¶</a></h3>
+<p>Note that pbench-move-results, pbench-copy-results and pbench-clear-results always assume that the run directory is the default
+<code class="docutils literal notranslate"><span class="pre">/var/lib/pbench-agent</span></code>.</p>
+<p>pbench-move-results and pbench-copy-results now (starting with Pbench version 0.31-108gf016ed6) take a –prefix option. This is
+explained in the <a class="reference internal" href="#accessing-results-on-the-web"><span class="std std-ref">Accessing results on the web</span></a> section below.</p>
+<p>Note also that pbench-start/stop/postprocess-tools must be called with exactly the same arguments. The built-in benchmark scripts
+do that already, but if you go your own way, make sure to follow this dictum.</p>
+<p><strong>–dir</strong></p>
+<p>specify the run directory for all the collections tools. This argument <strong>must</strong> be used by <code class="docutils literal notranslate"><span class="pre">pbench-start/stop/postprocess-tools</span></code>,
+so that all the results files are in known places:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pbench-start-tools --dir<span class="o">=</span>/var/lib/pbench-agent/foo
+pbench-stop-tools --dir<span class="o">=</span>/var/lib/pbench-agent/foo
+pbench-postprocess-tools --dir<span class="o">=</span>/var/lib/pbench-agent/foo
+</pre></div>
+</div>
+<p><strong>–remote</strong></p>
+<p>specify a remote host on which a collection tool (or set of collection tools) is to be registered:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pbench-register-tool --name<span class="o">=</span>&lt; tool&gt; --remote<span class="o">=</span>&lt; host&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="running-pbench-collection-tools-with-an-arbitrary-benchmark">
+<h2><a class="toc-backref" href="#id23">Running Pbench collection tools with an arbitrary benchmark</a><a class="headerlink" href="#running-pbench-collection-tools-with-an-arbitrary-benchmark" title="Permalink to this headline">¶</a></h2>
+<p>If you want to take advantage of Pbench’s data collection and other goodies, but your benchmark is not part of the set above
+(see <a class="reference internal" href="#available-benchmark-scripts"><span class="std std-ref">Available benchmark scripts</span></a>), or you want to run it differently so that the pre-packaged script does not work for you,
+that’s no problem (but, if possible, heed the WARNING above). The various Pbench phases can be run separately and you can fit
+your benchmark into the appropriate slot:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">group</span><span class="o">=</span>default
+<span class="nv">benchmark_tools_dir</span><span class="o">=</span>TBD
+
+pbench-register-tool-set --group<span class="o">=</span><span class="nv">$group</span>
+pbench-start-tools --group<span class="o">=</span><span class="nv">$group</span> --iteration<span class="o">=</span><span class="nv">$iteration</span> --dir<span class="o">=</span><span class="nv">$benchmark_tools_dir</span>
+&lt; run your benchmark&gt;
+pbench-stop-tools --group<span class="o">=</span><span class="nv">$group</span> --iteration<span class="o">=</span><span class="nv">$iteration</span> --dir<span class="o">=</span><span class="nv">$benchmark_tools_dir</span>
+pbench-postprocess-tools --group<span class="o">=</span><span class="nv">$group</span> --iteration<span class="o">=</span><span class="nv">$iteration</span> --dir<span class="o">=</span><span class="nv">$benchmark_tools_dir</span>
+pbench-copy-results
+</pre></div>
+</div>
+<p>Often, multiple experiments (or “iterations”) are run as part of a single run. The modified flow then looks like this:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">group</span><span class="o">=</span>default
+<span class="nv">experiments</span><span class="o">=</span><span class="s2">&quot;exp1 exp2 exp3&quot;</span>
+<span class="nv">benchmark_tools_dir</span><span class="o">=</span>TBD
+
+pbench-register-tool-set --group<span class="o">=</span><span class="nv">$group</span>
+<span class="k">for</span> exp in <span class="nv">$experiments</span> <span class="p">;</span><span class="k">do</span>
+     pbench-start-tools --group<span class="o">=</span><span class="nv">$group</span> --iteration<span class="o">=</span><span class="nv">$exp</span>
+     &lt; run the experiment&gt;
+     pbench-stop-tools --group<span class="o">=</span><span class="nv">$group</span> --iteration<span class="o">=</span><span class="nv">$exp</span>
+     pbench-postprocess-tools --group<span class="o">=</span><span class="nv">$group</span> --iteration<span class="o">=</span><span class="nv">$exp</span>
+<span class="k">done</span>
+pbench-copy-results
+</pre></div>
+</div>
+<p>Alternatively, you may be able to use the pbench-user-benchmark script as follows:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pbench-user-benchmark --config<span class="o">=</span><span class="s2">&quot;specjbb2005-4-JVMs&quot;</span> -- my_benchmark.sh
+</pre></div>
+</div>
+<p>which is going to run my_benchmark.sh in the &lt; run your benchmark&gt; slot above. Iterations and such are your responsibility.</p>
+<p>pbench-user-benchmark can also be used for a somewhat more specialized scenario: sometimes you just want to run the collection
+tools for a short time while your benchmark is running to get an idea of how the system looks. The idea here is to use pbench-
+user-benchmark to run a sleep of the appropriate duration in parallel with your benchmark:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pbench-user-benchmark --config<span class="o">=</span><span class="s2">&quot;specjbb2005-4-JVMs&quot;</span> -- sleep <span class="m">10</span>
+</pre></div>
+</div>
+<p>will start data collection, sleep for 10 seconds, then stop data collection and gather up the results. The config argument is a
+tag to distinguish this data collection from any other: you will probably want to make sure it’s unique.</p>
+<p>This works well for one-off scenarios, but for repeated usage on well defined phase changes you might want to investigate <a class="reference internal" href="#triggers"><span class="std std-ref">Triggers</span></a>.</p>
+</div>
+<div class="section" id="remote-hosts">
+<h2><a class="toc-backref" href="#id24">Remote hosts</a><a class="headerlink" href="#remote-hosts" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="multihost-benchmarks">
+<h3><a class="toc-backref" href="#id25">Multihost benchmarks</a><a class="headerlink" href="#multihost-benchmarks" title="Permalink to this headline">¶</a></h3>
+<p>Usually, a multihost benchmark is run using a host that acts as the “controller” of the run. There is a set of hosts on which
+data collection is to be performed while the benchmark is running. The controller may or may not be itself part of that set. In
+what follows, we assume that the controller has password-less ssh access to the relevant hosts.</p>
+<p>The recommended way to run your workload is to use the generic pbench-user-benchmark script. The workflow in that case is:</p>
+<ul class="simple">
+<li>Register the collection tools on each host in the set:</li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> host in <span class="nv">$hosts</span> <span class="p">;</span><span class="k">do</span>
+    pbench-register-tool-set --remote<span class="o">=</span><span class="nv">$host</span>
+<span class="k">done</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>Invoke pbench-user-benchmark with your workload generator as argument: that will start the collection tools on all the hosts
+and then run your workload generator; when that finishes, it will stop the collection tools on all the hosts and then run the
+postprocessing phase which will gather the data from all the remote hosts and run the postprocessing tools on everything.</li>
+<li>Run pbench-copy-results or pbench-move-results to upload the data to the results server.</li>
+</ul>
+<p>If you cannot use the pbench-user-benchmark script, then the process becomes more manual. The workflow is:</p>
+<ul class="simple">
+<li>Register the collection tools on <strong>each</strong> host as above.</li>
+<li>Invoke pbench-start-tools on the controller: that will start data collection on all of the remote hosts.</li>
+<li>Run the workload generator.</li>
+<li>Invoke pbench-stop-tools on the controller: that will stop data collection on all of the remote hosts.</li>
+<li>Invoke pbench-postprocess-tools on the controller: that will gather all the data from the remotes and run the postprocessing
+tools on all the data.</li>
+<li>Run pbench-copy-results or pbench-move-results to upload the data to the results server.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="customizing">
+<h2><a class="toc-backref" href="#id26">Customizing</a><a class="headerlink" href="#customizing" title="Permalink to this headline">¶</a></h2>
+<p>Some characteristics of Pbench are specified in config files and can be customized by adding your own config file to override the
+default settings. TBD</p>
+</div>
+<div class="section" id="results-handling">
+<h2><a class="toc-backref" href="#id27">Results handling</a><a class="headerlink" href="#results-handling" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="accessing-results-on-the-web">
+<h3><a class="toc-backref" href="#id28">Accessing results on the web</a><a class="headerlink" href="#accessing-results-on-the-web" title="Permalink to this headline">¶</a></h3>
+<p>This section describes how to get to your results using a web browser. It describes how pbench-move-results moves the results
+from your local controller to a centralized location and what happens there. It also describes the –prefix option to pbench-move
+-results (and pbench-copy-results) and a utility script, pbench-edit-prefix, that allows you to change how the results are viewed.</p>
+</div>
+<div class="section" id="where-to-go-to-see-results">
+<h3><a class="toc-backref" href="#id29">Where to go to see results</a><a class="headerlink" href="#where-to-go-to-see-results" title="Permalink to this headline">¶</a></h3>
+<p>Where pbench-move/copy-results copies the results is site-dependent. Check with the admin who set up the Pbench server and
+provided you with the configuration file for the pbench-agent installation.</p>
+</div>
+</div>
+<div class="section" id="advanced-topics">
+<h2><a class="toc-backref" href="#id30">Advanced topics</a><a class="headerlink" href="#advanced-topics" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="triggers">
+<h3><a class="toc-backref" href="#id31">Triggers</a><a class="headerlink" href="#triggers" title="Permalink to this headline">¶</a></h3>
+<p>Triggers are groups of tools that are started and stopped on specific events. They are registered with pbench-register-tool-trigger
+using the –start-trigger and –stop-trigger options. The output of the benchmark is piped into the pbench-tool-trigger tool which
+detects the conditions for starting and stopping the specified group of tools.</p>
+<p>There are some commands specifically for triggers:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="28%" />
+<col width="72%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Command</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>pbench-register-tool-trigger</td>
+<td><div class="first last line-block">
+<div class="line">register start and stop triggers for a tool group.</div>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td>pbench-list-triggers</td>
+<td><div class="first last line-block">
+<div class="line">list triggers and their start/stop criteria.</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td>pbench-tool-trigger</td>
+<td><div class="first last line-block">
+<div class="line">this is a Perl script that looks for the start-trigger and end-trigger</div>
+<div class="line">markers in the benchmark’s output, starting and stopping the appropriate</div>
+<div class="line">group of tools when it finds the corresponding marker.</div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<p>As an example, pbench-dbench uses three groups of tools: warmup, measurement and cleanup. It registers these groups as triggers using</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pbench-register-tool-trigger --group<span class="o">=</span>warmup --start-trigger<span class="o">=</span><span class="s2">&quot;warmup&quot;</span> --stop-trigger<span class="o">=</span><span class="s2">&quot;execute&quot;</span>
+pbench-register-tool-trigger --group<span class="o">=</span>measurement --start-trigger<span class="o">=</span><span class="s2">&quot;execute&quot;</span> --stop-trigger<span class="o">=</span><span class="s2">&quot;cleanup&quot;</span>
+pbench-register-tool-trigger --group<span class="o">=</span>cleanup --start-trigger<span class="o">=</span><span class="s2">&quot;cleanup&quot;</span> --stop-trigger<span class="o">=</span><span class="s2">&quot;Operation&quot;</span>
+</pre></div>
+</div>
+<p>It then pipes the output of the benchmark into pbench-tool-trigger:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">$benchmark_bin</span> --machine-readable --directory<span class="o">=</span><span class="nv">$dir</span> --timelimit<span class="o">=</span><span class="nv">$runtime</span>
+       --warmup<span class="o">=</span><span class="nv">$warmup</span> --loadfile <span class="nv">$loadfile</span> <span class="nv">$client</span> <span class="p">|</span>
+        tee <span class="nv">$benchmark_results_dir</span>/result.txt <span class="p">|</span>
+        pbench-tool-trigger <span class="s2">&quot;</span><span class="nv">$iteration</span><span class="s2">&quot;</span> <span class="s2">&quot;</span><span class="nv">$benchmark_results_dir</span><span class="s2">&quot;</span> no
+</pre></div>
+</div>
+<p>pbench-tool-trigger will then start the warmup group when it encounters the string “warmup” in the benchmark’s output and stop
+it when it encounters “execute”. It will also start the measurement group when it encounters “execute” and stop it when it
+encounters “cleanup” - and so on.</p>
+<p>Obviously, the start/stop conditions will have to be chosen with some care to ensure correct actions.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="../index.html" class="btn btn-neutral float-left" title="Pbench" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Pbench
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
