@@ -10,10 +10,13 @@ A Benchmarking and Performance Analysis Framework
 
 .. dropdown:: Pbench Agent
     :animate: fade-in-slide-down
+    :column: col-lg-4 col-md-4 col-sm-6 col-xs-12 p-2
 
     The code base includes three sub-systems. The first is the collection agent, ``pbench-agent``, responsible for providing commands 
     for running benchmarks across one or more systems, while properly collecting the configuration data for those systems, and 
     specified telemetry or data from various tools (``sar``, ``vmstat``, ``perf``, etc.).
+   
+
 
 The second sub-system is the ``pbench-server``, which is responsible for archiving result tar balls, indexing them, and unpacking 
 them for display.
